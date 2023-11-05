@@ -34,6 +34,7 @@ class HandleSpecial(RequestHandler):
     def handle(self) -> None:
         data = self.read(2)
         data = (data[0] << 8) | data[1]
+        print(bin(data))
         method = (data & 0xC0) >> 14
         if method == 0b00:
             one = data & 0x20
