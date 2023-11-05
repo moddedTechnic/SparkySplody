@@ -42,7 +42,7 @@ class HandleSpecial(RequestHandler):
                 print("Bad one bit")
                 return
             motor = (data & 0x3C00) >> 10
-            value = data & 0x001F
+            value = data & 0x01FF
             print(method, motor, value)
             return
         print(f"Bad method: {method}")
