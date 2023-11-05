@@ -35,6 +35,7 @@ class HandleSpecial(RequestHandler):
         data = self.read(2)
         data = (data[0] << 8) | data[1]
         method = (data & 0xC000) >> 14
+        print(bin(method)[2:].rjust(8, "0"))
         if method == 0b00:
             one = data & 0x0200
             if one == 0:
