@@ -34,15 +34,14 @@ class HandleSpecial(RequestHandler):
     def handle(self) -> None:
         data = self.read(2)
         data = (data[0] << 8) | data[1]
-        print(bin(data))
-        method = (data & 0xC0) >> 14
+        method = (data & 0xC000) >> 14
         if method == 0b00:
-            one = data & 0x20
+            one = data & 0x0200
             if one == 0:
                 print("Bad one bit")
                 return
-            motor = (data & 0x3C) >> 10
-            value = data & 0x1F
+            motor = (data & 0x3C00) >> 10
+            value = data & 0x001F
             print(method, motor, value)
             return
         print(f"Bad method: {method}")
