@@ -32,7 +32,9 @@ def start_server(handler, host: Optional[str] = None, port: int = 0):
 
 class HandleSpecial(RequestHandler):
     def handle(self) -> None:
-        data = int(self.read(4).decode("utf-8"), 16)
+        data = self.read(16).decode("utf-8")
+        print(data)
+        data = int(data[4], 16)
         method = (data & 0xC000) >> 14
         print(hex(method)[2:].rjust(4, "0"))
         if method == 0b00:
