@@ -1,0 +1,18 @@
+.parent {
+    transform: rotate(var(--angle));
+    position: relative;
+    right: -20rem;
+    height: 1rem;
+    width: 8rem;
+    background-color: #FF9F00;
+}
+
+.child {
+    transform: rotate(var(--angle));
+    position: relative;
+    top: 0;
+    right: -7rem;
+    height: 1rem;
+    width: 8rem;
+    background-color: #FF9F00;
+}
