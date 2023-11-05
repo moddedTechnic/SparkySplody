@@ -42,4 +42,4 @@ class HandleSpecial(RequestHandler):
 
 
 if __name__ == "__main__":
-    exit(start_server(HandleSpecial))
+    exit(start_server(HandleSpecial, host="100.73.203.93", port=6666))
