@@ -14,6 +14,9 @@ class RequestHandler(socketserver.StreamRequestHandler):
         """Reads `count` characters from the TCP stream"""
         return self.rfile.read(count)
 
+    def readline(self) -> bytes:
+        return self.rfile.readline()
+
 
 def start_server(handler, host: Optional[str] = None, port: int = 0):
     host = host or "localhost"
@@ -32,9 +35,12 @@ def start_server(handler, host: Optional[str] = None, port: int = 0):
 
 class HandleSpecial(RequestHandler):
     def handle(self) -> None:
-        data = self.read(16).decode("utf-8")
+        data = self.readline().decode("utf-8")
+        _, path, *_ = data.split(" ")
+        _, data, *_ = path.split("?")
+        _, data, *_ = data.split("=")
         print(data)
-        data = int(data[4], 16)
+        data = int(data, 36)
         method = (data & 0xC000) >> 14
         print(hex(method)[2:].rjust(4, "0"))
         if method == 0b00:
